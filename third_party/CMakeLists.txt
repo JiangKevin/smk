@@ -43,6 +43,7 @@ FetchContent_Declare(openal
 )
 
 FetchContent_GetProperties(freetype2)
+
 if(NOT freetype2_POPULATED)
   FetchContent_Populate(freetype2)
   set(CMAKE_DISABLE_FIND_PACKAGE_HarfBuzz TRUE)
@@ -53,6 +54,7 @@ if(NOT freetype2_POPULATED)
 endif()
 
 FetchContent_GetProperties(libnyquist)
+
 if(NOT libnyquist_POPULATED)
   FetchContent_Populate(libnyquist)
   set(LIBNYQUIST_PULSE TRUE)
@@ -67,12 +69,14 @@ if(NOT libnyquist_POPULATED)
 endif()
 
 FetchContent_GetProperties(glm)
+
 if(NOT glm_POPULATED)
   FetchContent_Populate(glm)
   add_subdirectory(${glm_SOURCE_DIR} ${glm_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
 
 FetchContent_GetProperties(glew)
+
 if(NOT glew_POPULATED AND NOT EMSCRIPTEN)
   FetchContent_Populate(glew)
   option(glew-cmake_BUILD_SHARED "Build the shared glew library" OFF)
@@ -81,6 +85,7 @@ if(NOT glew_POPULATED AND NOT EMSCRIPTEN)
 endif()
 
 FetchContent_GetProperties(glfw)
+
 if(NOT glfw_POPULATED AND NOT EMSCRIPTEN)
   FetchContent_Populate(glfw)
   add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR} EXCLUDE_FROM_ALL)
@@ -88,6 +93,7 @@ if(NOT glfw_POPULATED AND NOT EMSCRIPTEN)
 endif()
 
 FetchContent_GetProperties(openal)
+
 if(NOT openal_POPULATED AND NOT EMSCRIPTEN)
   FetchContent_Populate(openal)
   set(LIBTYPE STATIC)
