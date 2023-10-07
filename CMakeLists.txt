@@ -127,9 +127,11 @@ target_link_libraries(smk PRIVATE stbimage)
 if(SMK_BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
-if(SMK_BUILD_EXAMPLES)
+
+if(SMK_BUILD_APPS)
   add_subdirectory(apps)
 endif()
+
 if(SMK_BUILD_DOCS)
   add_subdirectory(doc)
 endif()
