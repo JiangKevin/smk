@@ -23,7 +23,6 @@ function(add_src target input)
       " -sALLOW_MEMORY_GROWTH"
       " -sDEMANGLE_SUPPORT"
       " -pthread"
-      " -shared-memory"
       " -s EXPORT_NAME='main' -s MODULARIZE=1"
     )
     set_property(GLOBAL APPEND_STRING PROPERTY LINK_FLAGS
@@ -51,8 +50,9 @@ function(add_src target input)
     target_link_libraries(${ns_target} PUBLIC "-l idbfs.js")
     target_link_libraries(${ns_target} PUBLIC "-l websocket.js")
     target_link_libraries(${ns_target} PUBLIC "-s USE_BOOST_HEADERS=1")
-    target_link_libraries(${ns_target} PUBLIC "-s EXPORTED_FUNCTIONS='_malloc,_free'")
+    target_link_libraries(${ns_target} PUBLIC "-s EXPORTED_FUNCTIONS='_main,_malloc,_free'")
     target_link_libraries(${ns_target} PUBLIC "-s EXPORTED_RUNTIME_METHODS='ccall,cwrap,UTF8ToString'")
+    target_link_libraries(${ns_target} PUBLIC "-s MODULARIZE=1")
 
     # Allow some files to be fetched.
     file(GLOB_RECURSE files "./assets/*")
