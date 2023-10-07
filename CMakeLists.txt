@@ -1,10 +1,14 @@
-cmake_minimum_required (VERSION 3.11)
+cmake_minimum_required(VERSION 3.11)
 
 project(smk
   LANGUAGES CXX
   VERSION 1.0.0
 )
 
+#
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/website/apps)
+
+#
 option(SMK_FETCH_DEPENDENCIES "Set to ON to fetch dependencies" ON)
 option(SMK_BUILD_DOCS "Set to ON to build docs" ON)
 option(SMK_BUILD_EXAMPLES "Set to ON to build examples" ON)
@@ -72,14 +76,14 @@ add_library(smk::smk ALIAS smk)
 
 target_include_directories(smk
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
   PRIVATE
-    src/
+  src/
 )
 
 # Add as many warning as possible:
-if (MSVC)
+if(MSVC)
   target_compile_options(smk PRIVATE "/wd4244")
   target_compile_options(smk PRIVATE "/wd4267")
   target_compile_options(smk PRIVATE "/wd4996")
@@ -115,8 +119,9 @@ if(SMK_BUILD_DOCS)
   add_subdirectory(doc)
 endif()
 
-if (SMK_CLANG_TIDY)
-  find_program( CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang-tidy executable" )
+if(SMK_CLANG_TIDY)
+  find_program(CLANG_TIDY_EXE NAMES "clang-tidy" DOC "Path to clang-tidy executable")
+
   if(NOT CLANG_TIDY_EXE)
     message(STATUS "clang-tidy not found.")
   else()
