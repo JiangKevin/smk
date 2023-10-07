@@ -23,7 +23,7 @@ function(add_src target input)
       " -sALLOW_MEMORY_GROWTH"
       " -sDEMANGLE_SUPPORT"
       " -pthread"
-      " -s EXPORT_NAME='main' -s MODULARIZE=1"
+      " -s EXPORT_NAME='hmi' -s MODULARIZE=1"
     )
     set_property(GLOBAL APPEND_STRING PROPERTY LINK_FLAGS
       " -s WASM=1"
