@@ -2,6 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include <smk/Color.hpp>
+#include <smk/Input.hpp>
 #include <smk/Shape.hpp>
 #include <smk/Texture.hpp>
 #include <smk/Transformable.hpp>
@@ -34,7 +35,7 @@ int main()
     float animation    = 0.f;
     float animation_df = 0.2f;
     float time         = 0.f;
-
+    auto& input        = window.input();
     window.ExecuteMainLoop(
         [ & ]
         {
@@ -52,27 +53,35 @@ int main()
 
             // Draw the cube.
             {
+                // glm::mat4 v( 1.f );
+                // v = glm::translate( v, { -2.f, -2.f, -10.f } );
+                // v = glm::rotate( v, animation, { 0.f, 1.f, 0.f } );
+                // cube.SetTransformation( v );
+                // window.Draw( cube );
+            }
+
+            if ( input.IsKeyReleased( GLFW_KEY_A ) )
+            {
                 glm::mat4 v( 1.f );
                 v = glm::translate( v, { -2.f, -2.f, -10.f } );
                 v = glm::rotate( v, animation, { 0.f, 1.f, 0.f } );
                 cube.SetTransformation( v );
-                window.Draw( cube );
             }
+            window.Draw( cube );
+            // // Draw the spheres
+            // {
+            //     glm::mat4 view( 1.f );
+            //     view = glm::translate( view, { -2.f, -1.f, -10.f - 0.5f * animation } );
+            //     view = glm::scale( view, { 0.4f, 0.4f, 0.4f } );
 
-            // Draw the spheres
-            {
-                glm::mat4 view( 1.f );
-                view = glm::translate( view, { -2.f, -1.f, -10.f - 0.5f * animation } );
-                view = glm::scale( view, { 0.4f, 0.4f, 0.4f } );
-
-                for ( int i = 1; i < 27; ++i )
-                {
-                    view = view * glm::translate( glm::mat4( 1.0 ), { 1.0, 0.0, 0.0 } );
-                    view = glm::rotate( view, 0.03f * i * animation * 0.1f, { 0.0, 0.0, 1.0 } );
-                    sphere.SetTransformation( glm::rotate( view, animation * ( i % 2 - 0.5f ), { 0.0, 0.0, 1.0 } ) );
-                    window.Draw( sphere );
-                }
-            }
+            //     for ( int i = 1; i < 27; ++i )
+            //     {
+            //         view = view * glm::translate( glm::mat4( 1.0 ), { 1.0, 0.0, 0.0 } );
+            //         view = glm::rotate( view, 0.03f * i * animation * 0.1f, { 0.0, 0.0, 1.0 } );
+            //         sphere.SetTransformation( glm::rotate( view, animation * ( i % 2 - 0.5f ), { 0.0, 0.0, 1.0 } ) );
+            //         window.Draw( sphere );
+            //     }
+            // }
 
             window.Display();
         } );
